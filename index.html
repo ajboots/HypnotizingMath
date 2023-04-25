@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hypnotizing Math</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <link href="./prism.css" rel="stylesheet" />
+</head>
+
+<body>
+  <pre><code class="language-javascript">
+      //setup code
+      const SIZE = 600;
+      ARC_SPACING = 3;
+      SPEED = 1 / 450000.0
+      function setup() {
+        createCanvas(SIZE, SIZE);
+        background(0)
+      }
+      //draw pattern every frame
+      function draw() { drawArcs(); }
+      
+      function drawArcs() {
+        //starting at the edge of the screen, draw an arc then move inward
+        for (arcS = SIZE; arcS > 1; arcS -= ARC_SPACING) {
+          //this magic color defines the gradient, a faded edge to the pattern, and the pattern slowly emerging at the start
+          let fadedEdge = sqrt(sqrt(min(millis() * 100, SIZE * 0.9))) + min(millis() / 100, SIZE * 0.9) - (arcS * arcS / SIZE);
+          fill(color((arcS * 100 / SIZE) + 250, 300, fadedEdge));
+
+          //This code draws the arcs! 
+          angle = (arcS) * (millis() * PI * SPEED)
+          arc(SIZE / 2, SIZE / 2, arcS, arcS, -angle, angle - PI);
+        }
+      }</code></pre>
+
+  <script src="./prism.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      Prism.highlightAll();
+    });
+  </script>
+  <script src="sketch.js"></script>
+</body>
+
+</html>
