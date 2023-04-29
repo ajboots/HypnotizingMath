@@ -4,52 +4,93 @@
 <head>
   <meta charset="UTF-8">
   <title>Hypnotizing Math</title>
-	<script language="javascript" type="text/javascript" src="p5.js"></script>
+  <script language="javascript" type="text/javascript" src="p5.js"></script>
   <script language="javascript" type="text/javascript" src="Arcs.js"></script>
-
+  <script src="https://www.desmos.com/api/v1.8/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   <link href="./prism.css" rel="stylesheet" />
 </head>
 
-<body>
-  <pre><code class="language-javascript">
-      //setup code
-      const SIZE = 600;
-      ARC_SPACING = 3;
-      SPEED = 1 / 450000.0
-      function setup() {
-        colorMode(HSB)
-        createCanvas(SIZE, SIZE);
-        background(0)
-      }
-      //draw pattern every frame
-      function draw() { drawArcs(); }
-      
-      function drawArcs() {
-        //starting at the edge of the screen, draw an arc then move inward
-        for (arcS = SIZE; arcS > 1; arcS -= ARC_SPACING) {
-          //this magic color defines the gradient, a faded edge to the pattern, and the pattern slowly emerging at the start
-          let fadedEdge = sqrt(sqrt(min(millis() * 100, SIZE * 0.9))) + min(millis() / 100, SIZE * 0.9) - (arcS * arcS / SIZE);
-          fill(color((arcS * 100 / SIZE) + 250, 300, fadedEdge));
+<body style="background-color:rgb(51, 51, 51)">
+  <div class="container">
+    <div class="mainSketch">
+      <div id="main"></div>
+      <h1 id="current_time"></h1>
+    </div>
 
-          //This code draws the arcs! 
-          angle = (arcS) * (millis() * PI * SPEED)
-          arc(SIZE / 2, SIZE / 2, arcS, arcS, -angle, angle - PI);
-        }
-      }</code></pre>
-      <div class="container">
-        <div id="ss"></div>
-        <div id="sd"></div>
+
+    <div class="codeColumn">
+      <div id="calculator" style="width: 100%; height: 35%;"></div>
+      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
+    const SIZE = 500;
+    ARC_SPACING = 3;
+    SPEED = 1 / 2000.0;
+    function setup() {
+      colorMode(HSB)
+      createCanvas(SIZE, SIZE);
+      background(0)
+    }
+    //draw pattern every frame
+    function draw() { drawArcs(); }
+    
+    function drawArcs() {
+      //starting at the edge of the screen, draw an arc then move inward
+      for (radius = SIZE; radius > 1; radius -= ARC_SPACING) {
+        //color gradient, faded edge, and the pattern slowly growing at the start
+        let fadedEdge = min(millis() / 50, SIZE) - (pow(radius, 5) / pow(radius, 4));
+        fill(color((radius * 100 / SIZE) + 250, 300, fadedEdge));
+        //defines and draws arc from time and arc distance from center
+        angle = (radius) * (millis() * PI * SPEED / SIZE); 
+        arc(SIZE / 2, SIZE / 2, radius, radius, -angle, angle - PI);
+      }
+    }</code></pre>
+
+    </div>
+    <!-- <div id="sd"></div>
         <div id="bs"></div>
-        <div id="bd"></div>
-      </div>
-      
+        <div id="bd"></div> -->
+  </div>
+
+
 
   <script src="./prism.js"></script>
+
   <script>
     window.addEventListener('load', function () {
       Prism.highlightAll();
     });
+  </script>
+  <script>
+    var elt = document.getElementById('calculator');
+    elt.style.width = "1600px";
+    elt.style.height = "1600px";
+    elt.style.margin = "auto";
+    var calculator = Desmos.Calculator(document.getElementById('calculator'), {
+      keypad: false, // Hide the keypad
+      expressionsCollapsed: true, // Hide the functions
+    });
+    calculator.updateSettings({ pixelRatio: 6 });
+    calculator.setMathBounds({
+      left: 0,
+      right: Math.PI,
+      bottom: -1.1,
+      top: 1.1
+    });
+    calculator.setExpression({ id: "slider", latex: "b = 10" });
+    for (n = 1; n < 12; n += 1) {
+      calculator.setExpression({ id: "graph" + n, latex: "y = \\sin(x *" + n + ")" });
+    }
+    // Add a vertical bar at x = 0
+    calculator.setExpression({ id: "bar", latex: "x=0" });
+
+    // Update the position of the vertical bar every 100 milliseconds
+    setInterval(function () {
+      var currentTime = parseFloat(document.getElementById("current_time").textContent);
+      calculator.setExpression({ id: "bar", latex: "x=" + currentTime });
+    }, 100);
+    var fullsize = calculator.screenshot();
+    // calculator.setExpression({ id: "graph1", latex: "y = \\sum_{n=1}^{b}\\sin(n\\cdot x/2)/(b/4)" ,sliderValue: "b"});
+
   </script>
 </body>
 
