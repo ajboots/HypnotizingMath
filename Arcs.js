@@ -8,7 +8,6 @@ function updateCurrentTime(time) {
 }
 
 var orb = function (p) { // p could be any variable name
-  var SPEED =  1/50.0
 
   p.setup = function() {
     p.colorMode(p.HSB)
@@ -24,10 +23,10 @@ var orb = function (p) { // p could be any variable name
       //gradient, faded edge, and the pattern slowly growing at the start
       p.fill((radius * 100 / p.size) + 250, 75, 300, p.alpha);
       //defines and draws arc from time and arc distance from center
-      angle = radius * p.millis() * SPEED / p.size / p.arc_spacing / 2;
+      angle = radius * p.millis() * p.speed / p.size / (p.arc_spacing / 2);
       p.arc(p.size / 2, p.size / 2, radius, radius, -angle, angle - p.PI);
     }
-    updateCurrentTime(p.millis() * SPEED / p.size);
+    updateCurrentTime(p.millis() * p.speed / p.size);
   }
 };
 // var snail = function (p) { // p could be any variable name
@@ -76,8 +75,9 @@ var orb = function (p) { // p could be any variable name
 
 var main = new p5(orb, 'main');
 main.size = 1600;
-main.arc_spacing = 20;
+main.arc_spacing = 40;
 main.alpha = 1;
+main.speed =  1/50.0
 
 // var sd = new p5(arcs, 'sd');
 // sd.size = 800;

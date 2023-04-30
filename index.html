@@ -22,28 +22,24 @@
     <div class="codeColumn">
       <div id="calculator" style="width: 100%; height: 35%;"></div>
       <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
-    const SIZE = 500;
-    ARC_SPACING = 3;
-    SPEED = 1 / 2000.0;
-    function setup() {
-      colorMode(HSB)
-      createCanvas(SIZE, SIZE);
-      background(0)
-    }
-    //draw pattern every frame
-    function draw() { drawArcs(); }
-    
-    function drawArcs() {
-      //starting at the edge of the screen, draw an arc then move inward
-      for (radius = SIZE; radius > 1; radius -= ARC_SPACING) {
-        //color gradient, faded edge, and the pattern slowly growing at the start
-        let fadedEdge = min(millis() / 50, SIZE) - (pow(radius, 5) / pow(radius, 4));
-        fill(color((radius * 100 / SIZE) + 250, 300, fadedEdge));
-        //defines and draws arc from time and arc distance from center
-        angle = (radius) * (millis() * PI * SPEED / SIZE); 
-        arc(SIZE / 2, SIZE / 2, radius, radius, -angle, angle - PI);
-      }
-    }</code></pre>
+        size = 400
+        speed = 1/100
+        arc_spacing = 4
+        function setup() {
+          colorMode(HSB)
+          createCanvas(size, size);
+          background(0)
+        }
+        //draw pattern every frame
+        function draw() {
+          //starting at the edge of the screen, draw an arc then move inward
+          for (radius = size; radius > 1; radius -= arc_spacing) {
+            fill((radius * 100 / size) + 250, 75, 300);
+            //defines and draws arc from time and arc distance from center
+            angle = radius * millis() * speed / size / (arc_spacing / 2);
+            arc(size / 2, size / 2, radius, radius, -angle, angle - PI);
+          }
+        }</code></pre>
 
     </div>
     <!-- <div id="sd"></div>
