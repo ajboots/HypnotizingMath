@@ -8,7 +8,7 @@ function updateCurrentTime(time) {
 }
 
 var orb = function (p) { // p could be any variable name
-  var SPEED =  1/100.0
+  var SPEED =  1/50.0
 
   p.setup = function() {
     p.colorMode(p.HSB)
@@ -24,59 +24,59 @@ var orb = function (p) { // p could be any variable name
       //gradient, faded edge, and the pattern slowly growing at the start
       p.fill((radius * 100 / p.size) + 250, 75, 300, p.alpha);
       //defines and draws arc from time and arc distance from center
-      updateCurrentTime(p.millis() * SPEED / p.size);
-      angle = radius * (p.millis() * SPEED / p.size)
+      angle = radius * p.millis() * SPEED / p.size / p.arc_spacing / 2;
       p.arc(p.size / 2, p.size / 2, radius, radius, -angle, angle - p.PI);
     }
+    updateCurrentTime(p.millis() * SPEED / p.size);
   }
 };
-var snail = function (p) { // p could be any variable name
-  var SPEED =  1/100.0
-  p.setup = function() {
-    p.colorMode(p.HSB)
-    p.createCanvas(p.size, p.size);
-    p.background(0)
-  }
-  //draw pattern every frame
-  p.draw = function() { p.clear(); p.drawArcs(); }
+// var snail = function (p) { // p could be any variable name
+//   var SPEED =  1/100.0
+//   p.setup = function() {
+//     p.colorMode(p.HSB)
+//     p.createCanvas(p.size, p.size);
+//     p.background(0)
+//   }
+//   //draw pattern every frame
+//   p.draw = function() { p.clear(); p.drawArcs(); }
 
-  p.drawArcs = function() {
-    //starting at the edge of the screen, draw an arc then move inward
-    for (radius = p.size; radius > 1; radius -= p.arc_spacing) {
-      //gradient, faded edge, and the pattern slowly growing at the start
-      p.fill((radius * 100 / p.size) + 250, 75, 300, p.alpha);
-      //defines and draws arc from time and arc distance from center
-      angle = radius * (p.millis() * SPEED / p.size)
-      p.arc(p.size / 2, p.size / 2, radius, radius, 0, angle - p.PI);
-    }
-  }
-};
-var pinwheel = function (p) { // p could be any variable name
-  var SPEED =  1/100.0
-  p.setup = function() {
-    p.colorMode(p.HSB)
-    p.createCanvas(p.size, p.size);
-    p.background(0)
-  }
-  //draw pattern every frame
-  p.draw = function() { p.clear(); p.drawArcs(); }
+//   p.drawArcs = function() {
+//     //starting at the edge of the screen, draw an arc then move inward
+//     for (radius = p.size; radius > 1; radius -= p.arc_spacing) {
+//       //gradient, faded edge, and the pattern slowly growing at the start
+//       p.fill((radius * 100 / p.size) + 250, 75, 300, p.alpha);
+//       //defines and draws arc from time and arc distance from center
+//       angle = radius * (p.millis() * SPEED / p.size)
+//       p.arc(p.size / 2, p.size / 2, radius, radius, 0, angle - p.PI);
+//     }
+//   }
+// };
+// var pinwheel = function (p) { // p could be any variable name
+//   var SPEED =  1/100.0
+//   p.setup = function() {
+//     p.colorMode(p.HSB)
+//     p.createCanvas(p.size, p.size);
+//     p.background(0)
+//   }
+//   //draw pattern every frame
+//   p.draw = function() { p.clear(); p.drawArcs(); }
 
-  p.drawArcs = function() {
-    //starting at the edge of the screen, draw an arc then move inward
-    for (radius = p.size; radius > 1; radius -= p.arc_spacing) {
-      //gradient, faded edge, and the pattern slowly growing at the start
-      p.fill((radius * 100 / p.size) + 250, 75, 300, p.alpha);
-      //defines and draws arc from time and arc distance from center
-      angle = radius * (p.millis() * SPEED / p.size)
-      p.arc(p.size / 2, p.size / 2, radius, radius, angle, angle + p.PI);
-    }
-  }
-};
+//   p.drawArcs = function() {
+//     //starting at the edge of the screen, draw an arc then move inward
+//     for (radius = p.size; radius > 1; radius -= p.arc_spacing) {
+//       //gradient, faded edge, and the pattern slowly growing at the start
+//       p.fill((radius * 100 / p.size) + 250, 75, 300, p.alpha);
+//       //defines and draws arc from time and arc distance from center
+//       angle = radius * (p.millis() * SPEED / p.size)
+//       p.arc(p.size / 2, p.size / 2, radius, radius, angle, angle + p.PI);
+//     }
+//   }
+// };
 
 
 var main = new p5(orb, 'main');
-main.size = 800;
-main.arc_spacing = 3;
+main.size = 1600;
+main.arc_spacing = 20;
 main.alpha = 1;
 
 // var sd = new p5(arcs, 'sd');
