@@ -25,11 +25,10 @@
 
     <div class="codeColumn">
       <div class="calculatorWrapper">
-        <div id="calculator" style="width: 100%; height: 35%;"></div>
+        <div id="calculator"></div>
       </div>
 
-      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
-  1      size = 400
+      <pre><code class="language-javascript">  1      size = 400
   2      speed = 1/100
   3      arc_spacing = 4
   4      function setup() {
@@ -49,31 +48,30 @@
   18     }</code></pre>
 
     </div>
-    <div>
-      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
-    15     angle = (size - radius) * millis() * speed / size / (arc_spacing / 2);
-    16     arc(size / 2, size / 2, radius, radius, -angle, angle - PI);
-        </code></pre>
+    <div class="smallCodeColumn">
+      <pre><code class="language-javascript" >15     angle = (size - radius) * millis() * speed / size / (arc_spacing / 2);
+16     arc(size / 2, size / 2, radius, radius, -angle, angle - PI);</code></pre>
       <div id="conch"></div>
-      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
-    15     angle = radius * millis() * speed / size / (arc_spacing / 2);
-    16     arc(size / 2, size / 2, radius, radius, angle, angle + PI);
-        </code></pre>
+      <pre><code class="language-javascript" >15     angle = radius * millis() * speed / size / (arc_spacing / 2);
+16     arc(size / 2, size / 2, radius, radius, angle, angle + PI);</code></pre>
       <div id="pinwheel"></div>
     </div>
-    <div>
-      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
-    15     angle = (size - radius) * millis() * speed / size / (arc_spacing / 2);
-    16     arc(size / 2, size / 2, size, radius, -angle, angle - PI);
-        </code></pre>
+    <div class="smallCodeColumn">
+      <pre><code class="language-javascript" >15     angle = (size - radius) * millis() * speed / size / (arc_spacing / 2);
+16     arc(size / 2, size / 2, size, radius, -angle, angle - PI);</code></pre>
       <div id="ball"></div>
-      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
-    15     angle = radius * millis() * speed / size / (arc_spacing / 2);
-    16     arc(size / 2, size / 2, radius, radius, angle, angle + PI);
-        </code></pre>
+      <pre><code class="language-javascript" >15     angle = radius * millis() * speed / size / (arc_spacing / 2);
+16     arc(size / 2, size / 2, radius, radius, angle, angle + PI);</code></pre>
       <div id="orb"></div>
     </div>
     <div>
+      <h1 class="whiteText">Hello World!</h1>
+      <p class="whiteText">This project visualizes frequency of sin waves</p>
+      <p class="whiteText">The graph sin waves of frequencies 1-12hz</p>
+      <p class="whiteText">Their intersection are maked along the blue line</p>
+      <p class="whiteText">At these points, the waves share a common factor</p>
+
+      <p class="whiteText">At these points, frequencies share a common factor</p>
       <img src="./images/hypno-github-qr.png" alt="QR Code to github projects" style="width:300px;height:300px;">
       <img src="./images/hypno-p5-qr.png" alt="QR Code to p5js editor" style="width:300px;height:300px;">
     </div>
@@ -90,26 +88,25 @@
   </script>
   <script>
     var elt = document.getElementById('calculator');
-    elt.style.width = "1600px";
+    elt.style.width = "1400px";
     elt.style.height = "800px";
     elt.style.margin = "auto";
     var calculator = Desmos.Calculator(document.getElementById('calculator'), {
       keypad: false, // Hide the keypad
       expressionsCollapsed: true, // Hide the functions
     });
-    calculator.updateSettings({ pixelRatio: 6 });
     calculator.setMathBounds({
       left: 0,
       right: Math.PI,
       bottom: 0,
       top: 1.05
     });
-    calculator.setExpression({ id: "graph 1", latex: "y = \\sin(x)", color: '#ffff00',lineWidth: "5"});
+    calculator.setExpression({ id: "graph 1", latex: "y = \\sin(x)", color: '#ffff00', lineWidth: "5" });
     for (n = 2; n < 10; n += 1) {
       calculator.setExpression({ id: "graph" + n, latex: "y = \\sin(x *" + n + ")", color: '#ff00' + n + n, lineOpacity: 1 / (n + 2) + .2, lineStyle: Desmos.Styles.DASHED });
     }
     // Add a vertical bar at x = 0
-    calculator.setExpression({ id: "bar", latex: "x=0", lineWidth: "10", color: '#00ffff'});
+    calculator.setExpression({ id: "bar", latex: "x=0", lineWidth: "10", color: '#00ffff' });
     calculator.focusFirstExpression()
     // Update the position of the vertical bar every 100 milliseconds
     setInterval(function () {

@@ -13,15 +13,27 @@ code[class*=language-],pre[class*=language-]{color:#9cb7ec;background:0 0;font-f
 .mainSketch {
   display: inline-block;
   vertical-align: top;
+  align-content: left;
   width: 1620px;
   height: 1620px;
+  padding-left: 0px;
+  margin-right: 1%;
+}
+.smallCodeColumn {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 18px;
   margin-right: 1%;
 }
 .codeColumn {
   display: inline-block;
   vertical-align: top;
-  font-size: 28px;
+  font-size: 24px;
   margin-right: 1%;
+}
+.whiteText {
+  color: #fff;
+  font-size: 22pt;
 }
 .calculatorWrapper {
   filter: invert(.8);
