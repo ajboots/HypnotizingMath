@@ -11,40 +11,72 @@
   <link href="./prism.css" rel="stylesheet" />
 </head>
 
-<body style="background-color:rgb(51, 51, 51)">
+<body style="background-color:rgb(12, 12, 12)">
   <div class="container">
     <div class="mainSketch">
       <div id="main"></div>
       <h1 id="current_time"></h1>
     </div>
-
+    <!-- <div>
+      <div id="tiny"></div>
+      <div id="small"></div>
+      <div id="medium"></div>
+    </div> -->
 
     <div class="codeColumn">
-      <div id="calculator" style="width: 100%; height: 35%;"></div>
+      <div class="calculatorWrapper">
+        <div id="calculator" style="width: 100%; height: 35%;"></div>
+      </div>
+
       <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
-        size = 400
-        speed = 1/100
-        arc_spacing = 4
-        function setup() {
-          colorMode(HSB)
-          createCanvas(size, size);
-          background(0)
-        }
-        //draw pattern every frame
-        function draw() {
-          //starting at the edge of the screen, draw an arc then move inward
-          for (radius = size; radius > 1; radius -= arc_spacing) {
-            fill((radius * 100 / size) + 250, 75, 300);
-            //defines and draws arc from time and arc distance from center
-            angle = radius * millis() * speed / size / (arc_spacing / 2);
-            arc(size / 2, size / 2, radius, radius, -angle, angle - PI);
-          }
-        }</code></pre>
+  1      size = 400
+  2      speed = 1/100
+  3      arc_spacing = 4
+  4      function setup() {
+  5        colorMode(HSB)
+  6        createCanvas(size, size);
+  7        background(0)
+  8      }
+  9      //draw pattern every frame
+  10     function draw() {
+  11       //starting at the edge of the screen, draw an arc then move inward
+  12       for (radius = size; radius > 1; radius -= arc_spacing) {
+  13         fill((radius * 100 / size) + 250, 75, 300);
+  14         //defines and draws arc from time and arc distance from center
+  15         angle = radius * millis() * speed / size / (arc_spacing / 2);
+  16         arc(size / 2, size / 2, radius, radius, -angle, angle - PI);
+  17       }
+  18     }</code></pre>
 
     </div>
-    <!-- <div id="sd"></div>
-        <div id="bs"></div>
-        <div id="bd"></div> -->
+    <div>
+      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
+    15     angle = (size - radius) * millis() * speed / size / (arc_spacing / 2);
+    16     arc(size / 2, size / 2, radius, radius, -angle, angle - PI);
+        </code></pre>
+      <div id="snail"></div>
+      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
+    15     angle = radius * millis() * speed / size / (arc_spacing / 2);
+    16     arc(size / 2, size / 2, radius, radius, angle, angle + PI);
+        </code></pre>
+      <div id="pinwheel"></div>
+    </div>
+    <div>
+      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
+    15     angle = (size - radius) * millis() * speed / size / (arc_spacing / 2);
+    16     arc(size / 2, size / 2, size, radius, -angle, angle - PI);
+        </code></pre>
+      <div id="ball"></div>
+      <pre><code class="language-javascript" style="height: 60%; width: 100%; ">
+    15     angle = radius * millis() * speed / size / (arc_spacing / 2);
+    16     arc(size / 2, size / 2, radius, radius, angle, angle + PI);
+        </code></pre>
+      <div id="orb"></div>
+    </div>
+    <div>
+      <img src="./images/hypno-github-qr.png" alt="QR Code to github projects" style="width:300px;height:300px;">
+      <img src="./images/hypno-p5-qr.png" alt="QR Code to p5js editor" style="width:300px;height:300px;">
+    </div>
   </div>
 
 
@@ -72,12 +104,12 @@
       bottom: 0,
       top: 1.05
     });
-    calculator.setExpression({ id: "graph 1", latex: "y = \\sin(x)", color: '#ff00ff' });
+    calculator.setExpression({ id: "graph 1", latex: "y = \\sin(x)", color: '#ffff00',lineWidth: "5"});
     for (n = 2; n < 10; n += 1) {
-      calculator.setExpression({ id: "graph" + n, latex: "y = \\sin(x *" + n + ")", color: '#ff00' + n + n, lineOpacity: 1/(n+2) + .2});
+      calculator.setExpression({ id: "graph" + n, latex: "y = \\sin(x *" + n + ")", color: '#ff00' + n + n, lineOpacity: 1 / (n + 2) + .2, lineStyle: Desmos.Styles.DASHED });
     }
     // Add a vertical bar at x = 0
-    calculator.setExpression({ id: "bar", latex: "x=0" });
+    calculator.setExpression({ id: "bar", latex: "x=0", lineWidth: "10", color: '#00ffff'});
     calculator.focusFirstExpression()
     // Update the position of the vertical bar every 100 milliseconds
     setInterval(function () {

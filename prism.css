@@ -23,3 +23,6 @@ code[class*=language-],pre[class*=language-]{color:#9cb7ec;background:0 0;font-f
   font-size: 28px;
   margin-right: 1%;
 }
+.calculatorWrapper {
+  filter: invert(.8);
+}

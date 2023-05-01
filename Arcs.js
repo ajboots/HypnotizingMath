@@ -1,92 +1,82 @@
-
-// save this file as sketch.js
-// Sketch One
+speed = 1 / 100000;
 
 function updateCurrentTime(time) {
   var currentTimeElement = document.getElementById("current_time");
   currentTimeElement.innerHTML = parseFloat(time.toFixed(3));;
 }
+// updateCurrentTime(p.millis() * p.speed );
 
-var orb = function (p) { // p could be any variable name
 
-  p.setup = function() {
+var arcs = function (p) { // p could be any variable name
+  p.setup = function () {
     p.colorMode(p.HSB)
     p.createCanvas(p.size, p.size);
     p.background(0)
   }
   //draw pattern every frame
-  p.draw = function() { p.clear(); p.drawArcs(); }
+  p.draw = function () { p.clear(); p.drawArcs(); }
 
-  p.drawArcs = function() {
+  p.drawArcs = function () {
     //starting at the edge of the screen, draw an arc then move inward
     for (radius = p.size; radius > 1; radius -= p.arc_spacing) {
-      //gradient, faded edge, and the pattern slowly growing at the start
-      p.fill((radius * 100 / p.size) + 250, 75, 300, p.alpha);
-      //defines and draws arc from time and arc distance from center
-      angle = radius * p.millis() * p.speed / p.size / (p.arc_spacing / 2);
-      p.arc(p.size / 2, p.size / 2, radius, radius, -angle, angle - p.PI);
+      p.arcFunc(p);
     }
-    updateCurrentTime(p.millis() * p.speed / p.size);
   }
 };
-// var snail = function (p) { // p could be any variable name
-//   var SPEED =  1/100.0
-//   p.setup = function() {
-//     p.colorMode(p.HSB)
-//     p.createCanvas(p.size, p.size);
-//     p.background(0)
-//   }
-//   //draw pattern every frame
-//   p.draw = function() { p.clear(); p.drawArcs(); }
 
-//   p.drawArcs = function() {
-//     //starting at the edge of the screen, draw an arc then move inward
-//     for (radius = p.size; radius > 1; radius -= p.arc_spacing) {
-//       //gradient, faded edge, and the pattern slowly growing at the start
-//       p.fill((radius * 100 / p.size) + 250, 75, 300, p.alpha);
-//       //defines and draws arc from time and arc distance from center
-//       angle = radius * (p.millis() * SPEED / p.size)
-//       p.arc(p.size / 2, p.size / 2, radius, radius, 0, angle - p.PI);
-//     }
-//   }
-// };
-// var pinwheel = function (p) { // p could be any variable name
-//   var SPEED =  1/100.0
-//   p.setup = function() {
-//     p.colorMode(p.HSB)
-//     p.createCanvas(p.size, p.size);
-//     p.background(0)
-//   }
-//   //draw pattern every frame
-//   p.draw = function() { p.clear(); p.drawArcs(); }
+var orbFunc = function (p) { // p could be any variable name
+  p.fill((radius * 100 / p.size) + 0, 75, 300, p.alpha);
+  angle = radius * p.millis() * speed / (p.arc_spacing / 2);
+  p.arc(p.size / 2, p.size / 2, radius, radius, -angle, angle - p.PI);
+  updateCurrentTime(p.millis() * speed);
+};
+var snailFunc = function (p) { // p could be any variable name
+  p.fill((radius * 100 / p.size) + 75, 75, 300, p.alpha);
+  angle = (p.size - radius) * p.millis() * speed / (p.arc_spacing / 2);
+  p.arc(p.size / 2, p.size / 2, radius, radius, -angle, angle - p.PI);
+};
+var ballFunc = function (p) { // p could be any variable name
+  p.fill((radius * 100 / p.size) + 150, 75, 300, p.alpha);
+  angle = (p.size - radius) * p.millis() * speed / (p.arc_spacing / 2);
+  p.arc(p.size / 2, p.size / 2, radius, p.size, -angle, angle - p.PI);
+};
+var pinwheelFunc = function (p) { // p could be any variable name
+  p.fill((radius * 100 / p.size) + 225, 75, 300, p.alpha);
+  angle = radius * p.millis() * speed / (p.arc_spacing / 2);
+  p.arc(p.size / 2, p.size / 2, radius, radius, angle, angle + p.PI);
+};
+var mixedFunc = function (p) { // p could be any variable name
+  p.fill((radius * 100 / p.size) + 250, 85, 300, p.alpha);
+  angle = radius * p.millis() * speed / (p.arc_spacing / 2);
+  p.arc(p.size / 2, p.size / 2, radius, radius, -angle*2, (angle/4) + p.PI);
+};
 
-//   p.drawArcs = function() {
-//     //starting at the edge of the screen, draw an arc then move inward
-//     for (radius = p.size; radius > 1; radius -= p.arc_spacing) {
-//       //gradient, faded edge, and the pattern slowly growing at the start
-//       p.fill((radius * 100 / p.size) + 250, 75, 300, p.alpha);
-//       //defines and draws arc from time and arc distance from center
-//       angle = radius * (p.millis() * SPEED / p.size)
-//       p.arc(p.size / 2, p.size / 2, radius, radius, angle, angle + p.PI);
-//     }
-//   }
-// };
-
-
-var main = new p5(orb, 'main');
+var main = new p5(arcs, 'main');
 main.size = 1600;
-main.arc_spacing = 40;
-main.alpha = 1;
-main.speed =  1/50.0
+main.arc_spacing = 20;
+main.alpha = .15;
+main.arcFunc = mixedFunc;
 
-// var sd = new p5(arcs, 'sd');
-// sd.size = 800;
-// sd.arc_spacing = 5;
+var ball = new p5(arcs, 'ball');
+ball.size = 700;
+ball.arc_spacing = 10;
+ball.alpha = .1;
+ball.arcFunc = ballFunc;
 
-// var bs = new p5(arcs, 'bs');
-// bs.size = 800;
-// bs.arc_spacing = 50;
+var snail = new p5(arcs, 'snail');
+snail.size = 700;
+snail.arc_spacing = 10;
+snail.alpha = .3;
+snail.arcFunc = snailFunc;
 
-// var bd = new p5(arcs, 'sd');
-// bd.size = 800;
-// bd.arc_spacing = 5;
+var pinwheel = new p5(arcs, 'pinwheel');
+pinwheel.size = 700;
+pinwheel.arc_spacing = 10;
+pinwheel.alpha = .4;
+pinwheel.arcFunc = pinwheelFunc;
+
+var orb = new p5(arcs, 'orb');
+orb.size = 700;
+orb.arc_spacing = 10;
+orb.alpha = .5;
+orb.arcFunc = orbFunc;
