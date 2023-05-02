@@ -32,10 +32,10 @@ var orbFunc = function (p) { // p could be any variable name
   p.arc(p.size / 2, p.size / 2, radius, radius, -angle, angle - p.PI);
   updateCurrentTime(p.millis() * speed);
 };
-var snailFunc = function (p) { // p could be any variable name
-  p.fill((radius * 100 / p.size) + 250, 75, 100, p.alpha);
+var mazeFunc = function (p) { // p could be any variable name
+  p.fill((radius * 30 / p.size) -10, 75, 100, p.alpha);
   angle = (p.size - radius) * p.millis() * speed / (p.arc_spacing / 2);
-  p.arc(p.size / 2, p.size / 2, radius, radius, -angle * 2, (angle / 2) + p.PI);
+  p.arc(p.size / 2, p.size / 2, radius, radius, -angle * 2, radius);
 };
 var ballFunc = function (p) { // p could be any variable name
   p.fill((radius * 70 / p.size) +0, 75, 100 , p.alpha);
@@ -48,16 +48,16 @@ var pinwheelFunc = function (p) { // p could be any variable name
   p.arc(p.size / 2, p.size / 2, radius, radius, angle, angle + p.PI);
 };
 var conchFunc = function (p) { // p could be any variable name
-  p.fill(((radius * 80 / p.size) + 320) %360, 100, 100, p.alpha);
-  angle = radius * p.millis() * speed / (p.arc_spacing / 2);
-  p.arc(p.size / 2, p.size / 2, radius, radius, -angle * 2, (angle / 4) + p.PI);
+  p.fill((radius * 120 / p.size) + 240, 75, 100, p.alpha);
+  angle = (p.size - radius) * p.millis() * speed / (p.arc_spacing / 2);
+  p.arc(p.size / 2, p.size / 2, radius, radius, -angle * 2, angle);
 };
 
 var main = new p5(arcs, 'main');
 main.size = 1600;
 main.arc_spacing = 10;
 main.alpha = .25;
-main.arcFunc = snailFunc;
+main.arcFunc = conchFunc;
 
 var ball = new p5(arcs, 'ball');
 ball.size = 700;
@@ -65,11 +65,11 @@ ball.arc_spacing = 10;
 ball.alpha = .05;
 ball.arcFunc = ballFunc;
 
-var conch = new p5(arcs, 'conch');
-conch.size = 700;
-conch.arc_spacing = 5;
-conch.alpha = .09;
-conch.arcFunc = conchFunc;
+var maze = new p5(arcs, 'maze');
+maze.size = 700;
+maze.arc_spacing = 5;
+maze.alpha = .09;
+maze.arcFunc = mazeFunc;
 
 var pinwheel = new p5(arcs, 'pinwheel');
 pinwheel.size = 700;

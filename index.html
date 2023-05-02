@@ -24,6 +24,8 @@
     </div> -->
 
     <div class="codeColumn">
+      <p class="whiteText">This graph shows sin waves of frequencies 1-12hz. Intersections of these waves correspond to pattern alignment</p>
+
       <div class="calculatorWrapper">
         <div id="calculator"></div>
       </div>
@@ -51,7 +53,7 @@
     <div class="smallCodeColumn">
       <pre><code class="language-javascript" >15     angle = (size - radius) * millis() * speed / size / (arc_spacing / 2);
 16     arc(size / 2, size / 2, radius, radius, -angle, angle - PI);</code></pre>
-      <div id="conch"></div>
+      <div id="maze"></div>
       <pre><code class="language-javascript" >15     angle = radius * millis() * speed / size / (arc_spacing / 2);
 16     arc(size / 2, size / 2, radius, radius, angle, angle + PI);</code></pre>
       <div id="pinwheel"></div>
@@ -65,9 +67,8 @@
       <div id="orb"></div>
     </div>
     <div>
-      <h1 class="whiteText">Hello World!</h1>
+      <h1 class="whiteText">This project was created to show the </h1>
       <p class="whiteText">This project visualizes frequency of sin waves</p>
-      <p class="whiteText">The graph sin waves of frequencies 1-12hz</p>
       <p class="whiteText">Their intersection are maked along the blue line</p>
       <p class="whiteText">At these points, the waves share a common factor</p>
 
