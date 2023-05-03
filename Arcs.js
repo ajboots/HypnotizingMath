@@ -60,25 +60,25 @@ main.alpha = .2;
 main.arcFunc = ballFunc;
 
 var ball = new p5(arcs, 'ball');
-ball.size = 600;
+ball.size = 500;
 ball.spacing = 10;
 ball.alpha = .2;
 ball.arcFunc = conchFunc;
 
 var maze = new p5(arcs, 'maze');
-maze.size = 600;
+maze.size = 500;
 maze.spacing = 7;
 maze.alpha = .2;
 maze.arcFunc = mazeFunc;
 
 var pinwheel = new p5(arcs, 'pinwheel');
-pinwheel.size = 600;
+pinwheel.size = 500;
 pinwheel.spacing = 10;
 pinwheel.alpha = .2;
 pinwheel.arcFunc = pinwheelFunc;
 
 var orb = new p5(arcs, 'orb');
-orb.size = 600;
+orb.size = 500;
 orb.spacing = 10;
 orb.alpha = .2;
 orb.arcFunc = orbFunc;
