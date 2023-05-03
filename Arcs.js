@@ -55,13 +55,13 @@ var conchFunc = function (p) { // p could be any variable name
 
 var main = new p5(arcs, 'main');
 main.size = 1250;
-main.spacing = 8;
+main.spacing = 5;
 main.alpha = .2;
 main.arcFunc = ballFunc;
 
 var ball = new p5(arcs, 'ball');
 ball.size = 550;
-ball.spacing = 10;
+ball.spacing = 7;
 ball.alpha = .2;
 ball.arcFunc = conchFunc;
 
@@ -73,12 +73,12 @@ maze.arcFunc = mazeFunc;
 
 var pinwheel = new p5(arcs, 'pinwheel');
 pinwheel.size = 550;
-pinwheel.spacing = 10;
+pinwheel.spacing = 7;
 pinwheel.alpha = .2;
 pinwheel.arcFunc = pinwheelFunc;
 
 var orb = new p5(arcs, 'orb');
 orb.size = 550;
-orb.spacing = 10;
+orb.spacing = 7;
 orb.alpha = .2;
 orb.arcFunc = orbFunc;
