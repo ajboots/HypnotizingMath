@@ -1,4 +1,4 @@
-speed = 1 / 100000;
+speed = 1 / 150000;
 
 
 
@@ -55,7 +55,7 @@ var conchFunc = function (p) { // p could be any variable name
 
 var main = new p5(arcs, 'main');
 main.size = 1250;
-main.spacing = 5;
+main.spacing = 7;
 main.alpha = .2;
 main.arcFunc = ballFunc;
 
