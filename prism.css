@@ -24,16 +24,19 @@ code[class*=language-],pre[class*=language-]{color:#9cb7ec;background:0 0;font-f
   vertical-align: top;
   font-size: 18px;
   margin-right: 1%;
+  font-family: Helvetica;
 }
 .codeColumn {
   display: inline-block;
   vertical-align: top;
-  font-size: 24px;
+  font-size: 20pt;
   margin-right: 1%;
+  font-family: Helvetica;
 }
 .whiteText {
   color: #fff;
-  font-size: 22pt;
+  font-size: 20pt;
+  font-family: Helvetica;
 }
 .calculatorWrapper {
   filter: invert(.8);

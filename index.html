@@ -24,15 +24,17 @@
     </div> -->
 
     <div class="codeColumn">
-      <p class="whiteText">This graph shows sin waves of frequencies 1-12hz. Intersections of these waves correspond to pattern alignment</p>
+      <p class="whiteText">This graph plots sin waves with frequencies 1-10hz. Intersections of these waves correspond to pattern alignment</p>
 
       <div class="calculatorWrapper">
         <div id="calculator"></div>
       </div>
+      <p class="whiteText">Generative art combines human creativity and computational power to help artists create visuals from simple rules </p>
+      <p class="whiteText">The source code for these sketches is shown below. With a few lines of code, visually striking patterns are created </p>
 
       <pre><code class="language-javascript">  1      size = 400
   2      speed = 1/100
-  3      arc_spacing = 4
+  3      spacing = 4
   4      function setup() {
   5        colorMode(HSB)
   6        createCanvas(size, size);
@@ -41,39 +43,44 @@
   9      //draw pattern every frame
   10     function draw() {
   11       //starting at the edge of the screen, draw an arc then move inward
-  12       for (radius = size; radius > 1; radius -= arc_spacing) {
-  13         fill((radius * 100 / size) + 250, 75, 300);
+  12       for (radius = size; radius > 1; radius -= spacing) {
+  13         fill((radius * 120 / size) + 240, 75, 100, alpha);
   14         //defines and draws arc from time and arc distance from center
-  15         angle = radius * millis() * speed / size / (arc_spacing / 2);
-  16         arc(size / 2, size / 2, radius, radius, -angle, angle - PI);
+  15         angle = (size - radius) * millis() * speed / (spacing / 2);
+  16         arc(size / 2, size / 2, radius, radius, -angle * 2, angle);
   17       }
   18     }</code></pre>
 
     </div>
     <div class="smallCodeColumn">
-      <pre><code class="language-javascript" >15     angle = (size - radius) * millis() * speed / size / (arc_spacing / 2);
-16     arc(size / 2, size / 2, radius, radius, -angle, angle - PI);</code></pre>
+      <pre><code class="language-javascript" >14     fill((radius * 40 / size) -10, 90, 100, alpha);
+15     angle = (size - radius) * millis() * speed / size / (spacing / 2);
+16     arc(size / 2, size / 2, radius, radius, -angle, radius);</code></pre>
       <div id="maze"></div>
-      <pre><code class="language-javascript" >15     angle = radius * millis() * speed / size / (arc_spacing / 2);
+      <pre><code class="language-javascript" >14     fill((radius * 100 / size) + 180, 75, 100, alpha);
+15     angle = radius * millis() * speed / (spacing / 2);
 16     arc(size / 2, size / 2, radius, radius, angle, angle + PI);</code></pre>
       <div id="pinwheel"></div>
     </div>
     <div class="smallCodeColumn">
-      <pre><code class="language-javascript" >15     angle = (size - radius) * millis() * speed / size / (arc_spacing / 2);
-16     arc(size / 2, size / 2, size, radius, -angle, angle - PI);</code></pre>
+      <pre><code class="language-javascript" >14     fill((radius * 70 / size) +0, 100, 100 , alpha);
+15    angle = (size - radius) * millis() * speed / (spacing / 2);
+16    arc(size / 2, size / 2, radius, size, -angle, angle - PI);</code></pre>
       <div id="ball"></div>
-      <pre><code class="language-javascript" >15     angle = radius * millis() * speed / size / (arc_spacing / 2);
-16     arc(size / 2, size / 2, radius, radius, angle, angle + PI);</code></pre>
+      <pre><code class="language-javascript" >14     fill((radius * 100 / size) + 120, 75, 100, alpha);
+15    angle = radius * millis() * speed / (spacing / 2);
+16    arc(size / 2, size / 2, radius, radius, -angle, angle - PI);</code></pre>
       <div id="orb"></div>
     </div>
     <div>
-      <h1 class="whiteText">This project was created to show the </h1>
-      <p class="whiteText">This project visualizes frequency of sin waves</p>
-      <p class="whiteText">Their intersection are maked along the blue line</p>
-      <p class="whiteText">At these points, the waves share a common factor</p>
-
-      <p class="whiteText">At these points, frequencies share a common factor</p>
+      <p class="whiteText">This project was created by Alex Boots, an NCSU alumni</p>
+      <p class="whiteText">I would love to hear feedback at alexjboots@gmail.com</p>
+      <p class="whiteText">I created this project to showcase human computer cocreativity</p>
+      <p class="whiteText">Interactive pattern editor</p>
+      <img src="./images/hypno-interactive.png" alt="QR Code to p5js editor" style="width:300px;height:300px;">
+      <p class="whiteText">Repository for this page</p>
       <img src="./images/hypno-github-qr.png" alt="QR Code to github projects" style="width:300px;height:300px;">
+      <p class="whiteText">Minimal pattern code</p>
       <img src="./images/hypno-p5-qr.png" alt="QR Code to p5js editor" style="width:300px;height:300px;">
     </div>
   </div>
@@ -90,24 +97,24 @@
   <script>
     var elt = document.getElementById('calculator');
     elt.style.width = "1400px";
-    elt.style.height = "800px";
+    elt.style.height = "600px";
     elt.style.margin = "auto";
     var calculator = Desmos.Calculator(document.getElementById('calculator'), {
       keypad: false, // Hide the keypad
       expressionsCollapsed: true, // Hide the functions
     });
     calculator.setMathBounds({
-      left: 0,
+      left: -.05,
       right: Math.PI,
       bottom: 0,
       top: 1.05
     });
     calculator.setExpression({ id: "graph 1", latex: "y = \\sin(x)", color: '#ffff00', lineWidth: "5" });
-    for (n = 2; n < 10; n += 1) {
-      calculator.setExpression({ id: "graph" + n, latex: "y = \\sin(x *" + n + ")", color: '#ff00' + n + n, lineOpacity: 1 / (n + 2) + .2, lineStyle: Desmos.Styles.DASHED });
+    for (n = 2; n < 11; n += 1) {
+      calculator.setExpression({ id: "graph" + n, latex: "y = \\sin(x *" + n + ")", color: '#ff00' + (n-1) + (n-1), lineOpacity: (1 / n) + .3, lineStyle: Desmos.Styles.DASHED });
     }
     // Add a vertical bar at x = 0
-    calculator.setExpression({ id: "bar", latex: "x=0", lineWidth: "10", color: '#00ffff' });
+    calculator.setExpression({ id: "bar", latex: "x=0", lineWidth: "5", color: '#00ffff' });
     calculator.focusFirstExpression()
     // Update the position of the vertical bar every 100 milliseconds
     setInterval(function () {
