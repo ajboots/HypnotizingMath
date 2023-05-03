@@ -54,7 +54,7 @@ var conchFunc = function (p) { // p could be any variable name
 };
 
 var main = new p5(arcs, 'main');
-main.size = 1550;
+main.size = 1200;
 main.spacing = 10;
 main.alpha = .2;
 main.arcFunc = ballFunc;
