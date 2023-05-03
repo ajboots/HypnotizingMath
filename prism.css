@@ -17,8 +17,8 @@ code[class*=language-],pre[class*=language-]{color:#9cb7ec;background:0 0;font-f
   display: inline-block;
   vertical-align: top;
   align-content: left;
-  width: 1220px;
-  height: 1220px;
+  width: 1100px;
+  height: 1100px;
   padding-left: 0px;
   margin-right: 1%;
 }
@@ -32,7 +32,7 @@ code[class*=language-],pre[class*=language-]{color:#9cb7ec;background:0 0;font-f
 .codeColumn {
   display: inline-block;
   vertical-align: top;
-  font-size: 15pt;
+  font-size: 12pt;
   margin-right: 1%;
   font-family: Helvetica;
 }
