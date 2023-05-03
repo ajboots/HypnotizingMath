@@ -18,8 +18,8 @@ code[class*=language-],pre[class*=language-]{color:#9cb7ec;background:0 0;font-f
   display: inline-block;
   vertical-align: top;
   align-content: left;
-  width: 1170px;
-  height: 1170px;
+  width: 1260px;
+  height: 1260px;
   padding-left: 0px;
   margin-right: 1%;
 }
@@ -33,13 +33,18 @@ code[class*=language-],pre[class*=language-]{color:#9cb7ec;background:0 0;font-f
 .codeColumn {
   display: inline-block;
   vertical-align: top;
-  font-size: 12pt;
+  font-size: 16pt;
   margin-right: 1%;
   font-family: Helvetica;
 }
 .whiteText {
   color: #fff;
-  font-size: 17.5pt;
+  font-size: 15.5pt;
+  font-family: Helvetica;
+}
+.rightSideWhiteText {
+  color: #fff;
+  font-size: 13.5pt;
   font-family: Helvetica;
 }
 .calculatorWrapper {
