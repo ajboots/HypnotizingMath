@@ -29,7 +29,7 @@ code[class*=language-],pre[class*=language-]{color:#9cb7ec;background:0 0;font-f
 .codeColumn {
   display: inline-block;
   vertical-align: top;
-  font-size: 20pt;
+  font-size: 18pt;
   margin-right: 1%;
   font-family: Helvetica;
 }
