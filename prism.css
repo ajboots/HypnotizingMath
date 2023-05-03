@@ -11,14 +11,15 @@ code[class*=language-],pre[class*=language-]{color:#9cb7ec;background:0 0;font-f
     align-items: center; /* center items vertically */
     border: 1px solid black; /* add a border to the container */
     padding: 10px; /* add padding to the container */
+    width:4000px;
     margin: 10px 0; /* add margin to the top and bottom of the container */
   }
 .mainSketch {
   display: inline-block;
   vertical-align: top;
   align-content: left;
-  width: 1100px;
-  height: 1100px;
+  width: 1170px;
+  height: 1170px;
   padding-left: 0px;
   margin-right: 1%;
 }

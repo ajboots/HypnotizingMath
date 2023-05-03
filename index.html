@@ -115,7 +115,7 @@
   });
   calculator.setExpression({ id: "graph 1", latex: "y = \\sin(x)", color: '#ffff00', lineWidth: "5" });
   for (n = 2; n < 11; n += 1) {
-    calculator.setExpression({ id: "graph" + n, latex: "y = \\sin(x *" + n + ")", color: '#ff00' + (n - 1) + (n - 1), lineOpacity: (1 / n) + .3, lineStyle: Desmos.Styles.DASHED });
+    calculator.setExpression({ id: "graph" + n, latex: "y = \\sin(x *" + n + ")", color: '#ff00' + (n - 1) + (n - 1), lineOpacity: (1 / (2*n)) + .3, lineStyle: Desmos.Styles.DASHED });
   }
   // Add a vertical bar at x = 0
   calculator.setExpression({ id: "bar", latex: "x=0", lineWidth: "5", color: '#00ffff' });
