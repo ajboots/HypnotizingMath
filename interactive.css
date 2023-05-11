@@ -1,0 +1,21 @@
+#interactiveSketchContainer {
+  /* center items vertically */
+  width: 100vh;
+  height: 100vh;
+}
+#horizontalFlex {
+  display: flex;
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+  padding-right: 10px;
+}
+#titleContainer {
+  width: calc(100vw - 100vh);
+  vertical-align: top;
+  background-position-y: 0px;
+  position: relative;
+}
+.title {
+  position: absolute;
+}
