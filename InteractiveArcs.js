@@ -7,6 +7,7 @@ var availableHeight = window.innerHeight - 16;
 size = availableHeight;
 var pageOffsetX;
 var pageOffsetY;
+var uiSize;
 function arcCount(p) {
   return p.pow(SLIDER_MAX, 0.7) - p.pow(sliders[0].value(), 0.7) + .4
 }
@@ -26,13 +27,14 @@ function calculatePageOffset() {
   var container = document.getElementById('interactiveSketchContainer');
   var rect = container.getBoundingClientRect();
   pageOffsetX = rect.left + window.pageXOffset + size + 10;
-  pageOffsetY = rect.top + window.pageYOffset;
+  pageOffsetY = (window.innerWidth - size) / 8;
+  uiSize = (window.innerHeight - pageOffsetY ) / 28;
 }
 var interactiveArcs = function (p) {
   p.setup = function () {
     calculatePageOffset();
-    makeButtons(p);
     makeSliders(p);
+    printCode(p);
     p.colorMode(p.HSB)
     p.createCanvas(size, size);
   }
@@ -40,7 +42,7 @@ var interactiveArcs = function (p) {
   p.draw = function () {
     p.background(10)
     //starting at the edge of the screen, draw an arc then move inward
-    for (radius = size; radius > 1; radius -= arcCount(p)) {
+    for (radius = size - 1; radius > 0; radius -= arcCount(p)) {
       draw_func(p, radius);
     }
   }
@@ -55,7 +57,7 @@ function orbFuncPreset(p, radius) {
 function mazeFuncPreset(p, radius) {
   p.fill((radius * 50 / size) + colorShift(p), 90, 100, getAlpha(p));
   angle = (size - radius) * getTime(p) / (arcCount(p) / 2);
-  p.arc(size / 2, size / 2, radius, radius, -angle, radius);
+  p.arc(size / 2, size / 2, radius, radius, -angle, radius / 150);
 };
 function ballFuncPreset(p, radius) {
   p.fill((radius * 70 / size) + colorShift(p), 100, 100, getAlpha(p));
@@ -72,28 +74,43 @@ function conchFuncPreset(p, radius) {
   angle = (size - radius) * getTime(p) / (arcCount(p) / 2);
   p.arc(size / 2, size / 2, radius, radius, -angle * 2, angle);
 };
-const BUTTON_HEIGHT = 40;
-function makeButtons(p) {
+function makeButtons(p, startingY) {
+  let h1 = p.createElement('h2', 'Arc Forumlas');
+  h1.style('color', '#ffffff');
+  h1.style('font-size', 15+uiSize/2 + 'px');
+  h1.position(pageOffsetX, startingY + uiSize*2);
   console.log(pageOffsetX)
   for (let i = 0; i < 5; i++) { // create 5 buttons
     p.createButton(PatternNames[i]) // label button with number
-      .position(i * (size / 5) + pageOffsetX, size + pageOffsetY) // position button
-      .size(size / 5, BUTTON_HEIGHT) // set button size
+      .position(i * ((window.innerWidth - size - 70) / 5) + pageOffsetX, uiSize*5 + startingY) // position button
+      .size((window.innerWidth - size - 70) / 5, uiSize*2) // set button size
       .mousePressed(() => { // set callback for button click
         draw_func = PatternFuncs[i]; // set global state variable to button number
       });
   }
 }
-const ROOM_FOR_TEXT = 40;
+const ROOM_FOR_TEXT = 70;
 const SLIDER_MAX = 300;
-function makeSliders(p) {
 
+function makeSliders(p) {
+  let h1 = p.createElement('h2', 'Simulation Setting');
+  h1.style('color', '#ffffff');
+  h1.style('font-size', 15+uiSize/2 + 'px');
+  h1.position(pageOffsetX,  pageOffsetY );
   for (let i = 0; i < 5; i++) { // create 5 buttons
-    sliders[i] = p.createSlider(0, SLIDER_MAX, 50).position(pageOffsetX + ROOM_FOR_TEXT, pageOffsetY + BUTTON_HEIGHT + i * 15).size(400);
-    let h5 = p.createElement('h5', SettingNames[i]);
-    h5.style('color', '#000000');
-    h5.position(pageOffsetX, (BUTTON_HEIGHT / 2)  + pageOffsetY + (i * 15));
+    sliders[i] = p.createSlider(0, SLIDER_MAX, 250 - i * 40)
+      .position(pageOffsetX + ROOM_FOR_TEXT, uiSize+pageOffsetY + i * uiSize + 32)
+      .size(Math.min((window.innerWidth - size - (ROOM_FOR_TEXT * 2))));
+    let h2 = p.createElement('h3', SettingNames[i]);
+    h2.style('color', '#ffffff');
+    h2.position(pageOffsetX,  uiSize+pageOffsetY + i * uiSize + 10);
   }
+  makeButtons(p, uiSize+pageOffsetY + 4 * uiSize + 10);
 }
 
+function printCode(p) {
+  // let h1 = p.createElement('h2', '');
+  // h1.style('color', '#ffffff');
+  // h1.position(pageOffsetX, window.innerHeight -430);
+}
 var interactive = new p5(interactiveArcs, 'interactive');
