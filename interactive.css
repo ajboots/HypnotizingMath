@@ -147,7 +147,7 @@ pre[class*=language-] {
   position: absolute;
 }
 .codeContainer {
-  margin-bottom: calc(100vh / 2);
+  margin-bottom: calc((100vh / 65) *31);
   margin-right : 1px;
   width: calc((100vw - 100vh) / 1.05);
   height: 1px;
