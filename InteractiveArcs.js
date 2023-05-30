@@ -55,12 +55,12 @@ function orbFuncPreset(p, radius) {
   p.arc(size / 2, size / 2, radius, radius, -angle, angle - p.PI);
 };
 function mazeFuncPreset(p, radius) {
-  p.fill((radius * 50 / size) + colorShift(p), 90, 100, getAlpha(p));
+  p.fill((radius * 100 / size) + colorShift(p), 75, 100, getAlpha(p));
   angle = (size - radius) * getTime(p) / (arcCount(p) / 2);
   p.arc(size / 2, size / 2, radius, radius, -angle, radius / 150);
 };
 function ballFuncPreset(p, radius) {
-  p.fill((radius * 70 / size) + colorShift(p), 100, 100, getAlpha(p));
+  p.fill((radius * 100 / size) + colorShift(p), 75, 100, getAlpha(p));
   angle = (size - radius) * getTime(p) / (arcCount(p) / 2);
   p.arc(size / 2, size / 2, radius, size, -angle, angle - p.PI);
 };
@@ -70,7 +70,7 @@ function wheelFuncPreset(p, radius) {
   p.arc(size / 2, size / 2, radius, radius, angle, angle + p.PI);
 }
 function conchFuncPreset(p, radius) {
-  p.fill((radius * 120 / size) + colorShift(p), 75, 100, getAlpha(p));
+  p.fill((radius * 100 / size) + colorShift(p), 75, 100, getAlpha(p));
   angle = (size - radius) * getTime(p) / (arcCount(p) / 2);
   p.arc(size / 2, size / 2, radius, radius, -angle * 2, angle);
 };
@@ -79,7 +79,6 @@ function makeButtons(p, startingY) {
   h1.style('color', '#ffffff');
   h1.style('font-size', 15+uiSize/2 + 'px');
   h1.position(pageOffsetX, startingY + uiSize*2);
-  console.log(pageOffsetX)
   for (let i = 0; i < 5; i++) { // create 5 buttons
     p.createButton(PatternNames[i]) // label button with number
       .position(i * ((window.innerWidth - size - 70) / 5) + pageOffsetX, uiSize*5 + startingY) // position button

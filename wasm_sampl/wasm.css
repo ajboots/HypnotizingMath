@@ -1,0 +1,30 @@
+*, 
+*::before, 
+*::after {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  font-family: 'Raleway', sans-serif; 
+}
+
+.container {
+  padding: 5% 1.5rem;
+  max-width: 800px;
+  width: 100%;
+}
+
+#app {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  font-size: 3rem;
+}

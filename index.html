@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -32,24 +33,24 @@
     </div>
     <div class="codeContainer">
       <h1 style="color: white; font-size: 24px;">Resulting Code</h1>
-      <pre><code class="language-javascript">  1    size = 400
-  2    speed = 1/100
-  3    spacing = 4
-  4    function setup() {
-  5      colorMode(HSB)
-  6      createCanvas(size, size);
-  7      background(0)
-  8    }
-  9    //draw pattern every frame
-  10   function draw() {
-  11     //starting at the edge of the screen, draw an arc then move inward
-  12     for (radius = size; radius > 1; radius -= spacing) {
-  13       fill((radius * 120 / size) + 240, 75, 100, alpha);
-  14       //defines and draws arc from time and arc distance from center
-  15       angle = (size - radius) * millis() * speed / (spacing / 2);
-  16       arc(size / 2, size / 2, radius, radius, -angle * 2, angle);
-  17     }
-  18   }</code></pre>
+      <pre><code class="language-javascript">   size = 400
+   speed = 1/100
+   spacing = 4
+   function setup() {
+     colorMode(HSB)
+     createCanvas(size, size);
+     background(0)
+   }
+   //draw pattern every frame
+   function draw() {
+     //starting at the edge of the screen, draw an arc then move inward
+     for (radius = size; radius > 1; radius -= spacing) {
+       fill((radius * 120 / size) + 240, 75, 100, alpha);
+       //defines and draws arc from time and arc distance from center
+       angle = (size - radius) * millis() * speed / (spacing / 2);
+       arc(size / 2, size / 2, radius, radius, -angle * 2, angle);
+     }
+   }</code></pre>
     </div>  </div>
 
 </body>
