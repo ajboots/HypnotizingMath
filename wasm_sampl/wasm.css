@@ -1,5 +1,5 @@
-*, 
-*::before, 
+*,
+*::before,
 *::after {
   padding: 0;
   margin: 0;
@@ -7,10 +7,9 @@
 
 body {
   min-height: 100vh;
-  background-color: #f8f9fa;
   display: flex;
   justify-content: center;
-  font-family: 'Raleway', sans-serif; 
+  font-family: 'Raleway', sans-serif;
 }
 
 .container {
@@ -18,8 +17,14 @@ body {
   max-width: 800px;
   width: 100%;
 }
+.options {
+  background-color: rgb(173, 173, 168);
+}
+.text {
+  background-color: beige;
+}
 
-#app {
+#circularslider {
   display: flex;
   flex-wrap: wrap;
 }

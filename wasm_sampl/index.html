@@ -5,39 +5,74 @@
   <link rel="stylesheet" type="text/css" href="wasm.css">
 </head>
 
-<body>
+<body style="background-color:rgb(12, 12, 12)">
   <!-- <p id="slidertitle" class="slidertitle">some</p> -->
 
   <!-- Note the usage of `type=module` here as this is an ES6 module -->
 
   <canvas id="canvas" width=1000x; height=1000x;></canvas>
+  <div id="circularslider" ></div>
   <div class="container">
-    <fieldset>
-      <legend>Choose pattern parameters:</legend>
-
+    <fieldset class="options">
+      <legend class="text">Choose pattern parameters</legend>
+      <p>&emsp;</p>
       <div>
         <input type="checkbox" id="Reverse" name="Reverse" checked>
-        <label for="Reverse">Reverse</label>
+        <span class="text" title="Makes inner arcs spin faster than outer">Reverse</span>
       </div>
 
       <div>
         <input type="checkbox" id="Ball" name="Ball">
-        <label for="Ball">Ball</label>
+        <span class="text" title="Fixes arc end point to the top and bottom of the screen">Ball</span>
       </div>
 
       <div>
-        <input type="range" id="Arc1Speed" name="Arc1Speed" min="-5" max="5" value="2" step="1">
-        <label for="Arc1Speed">Arc 1 Speed</label>
+        <input type="range" id="Arc1Speed" name="Arc1Speed" min="-16" max="16" value="2" step="2">
+        <input class="text" type="number" id="Arc1Num" name="Arc1Num" value="2" style="width:100px;">
+        <label class="text" for="Arc1Speed">Angle one Speed</label>
       </div>
 
       <div>
-        <input type="range" id="Arc2Speed" name="Arc2Speed" min="-5" max="5" value="-2" step="1">
-        <label for="Arc2Speed">Arc 2 Speed</label>
+        <input type="range" id="Arc2Speed" name="Arc2Speed" min="-16" max="16" value="-2" step="2">
+        <input class="text" type="number" id="Arc2Num" name="Arc2Num" value="-2" style="width:100px;">
+        <label class="text" for="Arc2Speed">Angle two Speed</label>
+      </div>
+
+      <div>
+        <input type="range" id="TotalArcs" name="TotalArcs" min="1" max="250" value="100" step="1">
+        <input class="text" type="number" id="ArcCount" name="ArcCount" value="100" style="width:100px;">
+        <label class="text" for="TotalArcs">How many Arcs?</label>
       </div>
 
     </fieldset>
-    <div id="app"></div>
   </div>
+
+  <script id="link slider and number">
+    var range1 = document.getElementById('Arc1Speed');
+    var field1 = document.getElementById('Arc1Num');
+    range1.addEventListener('input', function (e) {
+      field1.value = e.target.value;
+    });
+    field1.addEventListener('input', function (e) {
+      range1.value = e.target.value;
+    });
+    var range2 = document.getElementById('Arc2Speed');
+    var field2 = document.getElementById('Arc2Num');
+    range2.addEventListener('input', function (e) {
+      field2.value = e.target.value;
+    });
+    field2.addEventListener('input', function (e) {
+      range2.value = e.target.value;
+    });
+    var range3 = document.getElementById('TotalArcs');
+    var field3 = document.getElementById('ArcCount');
+    range3.addEventListener('input', function (e) {
+      field3.value = e.target.value;
+    });
+    field3.addEventListener('input', function (e) {
+      range3.value = e.target.value;
+    });
+  </script>
 
   <script type="module">
     import init, { arcs } from './pkg/wasm_sample.js';
@@ -57,11 +92,11 @@
       arcs(
         100,
         iterCount / 100,
-        UI_ANGLE_DISPLAYED,
+        document.getElementById('ArcCount').value,
         document.getElementById('Ball').checked,
         document.getElementById('Reverse').checked,
-        document.getElementById('Arc1Speed').value,
-        document.getElementById('Arc2Speed').value);
+        document.getElementById('Arc1Num').value,
+        document.getElementById('Arc2Num').value);
       requestAnimationFrame(drawArcs);
       iterCount++;
     }
@@ -69,12 +104,12 @@
 
   <script type="text/javascript" src="circularSlider.js"></script>
   <script>
-    // slider app options
+    // slider circularslider options
     const opts = {
-      DOMselector: '#app',
+      DOMselector: '#circularslider',
       sliders: [
         {
-          radius: 40,
+          radius: 500,
           min: 1,
           max: 30,
           step: .01,

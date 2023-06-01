@@ -2,191 +2,12 @@ extern crate wasm_bindgen;
 use std::f64::consts::PI;
 
 use wasm_bindgen::prelude::*;
-// type ArcFunc = fn(i32, i32) -> i32;
-fn maze(
-    size: i32,
-    context: web_sys::CanvasRenderingContext2d,
-    current_time: f64,
-    arc_spacing: f64,
-    center: f64,
-) {
-    let mut radius = size / 2 - 1;
-    while radius > 0 {
-        context.begin_path();
 
-        let angle = 0.1 * ((size - radius) as f64 * current_time) / (arc_spacing / 2.0);
-        let arc_angle_1 = -angle;
-        let arc_angle_2 = radius as f64 / 150.0;
-        let mut cww = true;
-        if (arc_angle_1 / (2.0 * PI)) as i64 % 2 == 0 {
-            cww = true;
-        }
-        context
-            .arc_with_anticlockwise(center, center, radius as f64, arc_angle_1, arc_angle_2, cww)
-            .unwrap();
-        context.stroke();
-        //create lines to close pie slice
-        context.move_to(
-            arc_angle_2.cos() * radius as f64 + center,
-            arc_angle_2.sin() * radius as f64 + center,
-        );
-        context.line_to(center, center);
-        context.line_to(
-            arc_angle_1.cos() * radius as f64 + center,
-            arc_angle_1.sin() * radius as f64 + center,
-        );
-        //fill pie slice
-        let hue = &(230 + radius as i32 * 250 / size).to_string();
-        let color = "hsla(".to_owned() + hue + ",80%,50%,0.2)";
-        context.set_fill_style(&(color.into()));
-        context.fill();
-
-        radius -= arc_spacing as i32;
-    }
-}
-fn orb(
-    size: i32,
-    context: web_sys::CanvasRenderingContext2d,
-    current_time: f64,
-    arc_spacing: f64,
-    center: f64,
-) {
-    let mut radius = size / 2 - 1;
-    while radius > 0 {
-        context.begin_path();
-
-        let angle = 0.1 * (radius as f64 * current_time) / (arc_spacing / 2.0);
-        let arc_angle_2 = angle + PI;
-        let arc_angle_1 = -angle;
-        let mut cww = true;
-        if (arc_angle_1 / (2.0 * PI)) as i64 % 2 == 0 {
-            cww = true;
-        }
-        context
-            .arc_with_anticlockwise(center, center, radius as f64, arc_angle_1, arc_angle_2, cww)
-            .unwrap();
-        context.stroke();
-        //create lines to close pie slice
-        context.move_to(
-            arc_angle_2.cos() * radius as f64 + center,
-            arc_angle_2.sin() * radius as f64 + center,
-        );
-        context.line_to(center, center);
-        context.line_to(
-            arc_angle_1.cos() * radius as f64 + center,
-            arc_angle_1.sin() * radius as f64 + center,
-        );
-        //fill pie slice
-        let hue = &(230 + radius as i32 * 250 / size).to_string();
-        let color = "hsla(".to_owned() + hue + ",80%,50%,0.2)";
-        context.set_fill_style(&(color.into()));
-        context.fill();
-
-        radius -= arc_spacing as i32;
-    }
-}
-fn ball(
-    size: i32,
-    context: web_sys::CanvasRenderingContext2d,
-    current_time: f64,
-    arc_spacing: f64,
-    center: f64,
-) {
-    let mut radius = size / 2 - 1;
-    while radius > 0 {
-        context.begin_path();
-
-        let angle = 0.1 * ((size - radius) as f64 * current_time) / (arc_spacing / 2.0);
-        let arc_angle_2 = angle + PI;
-        let arc_angle_1 = -arc_angle_2 + PI;
-        let mut cww = true;
-        if (arc_angle_1 / (2.0 * PI)) as i64 % 2 == 0 {
-            cww = true;
-        }
-        context
-            .ellipse_with_anticlockwise(
-                center,
-                center,
-                radius as f64,
-                size as f64 / 2.0,
-                0.0,
-                arc_angle_1,
-                arc_angle_2,
-                cww,
-            )
-            .unwrap();
-        context.stroke();
-        //create lines to close pie slice
-        context.move_to(
-            arc_angle_2.cos() * radius as f64 + center,
-            arc_angle_2.sin() * (size / 2) as f64 + center,
-        );
-        context.line_to(center, center);
-        context.line_to(
-            arc_angle_1.cos() * radius as f64 + center,
-            arc_angle_1.sin() * (size / 2) as f64 + center,
-        );
-        //fill pie slice
-        let hue = &(230 + radius as i32 * 250 / size).to_string();
-        let color = "hsla(".to_owned() + hue + ",80%,50%,0.2)";
-        context.set_fill_style(&(color.into()));
-        context.fill();
-
-        radius -= arc_spacing as i32;
-    }
-}
-pub fn pattern_builder(
-    size: i32,
-    context: web_sys::CanvasRenderingContext2d,
-    current_time: f64,
-    arc_spacing: f64,
-    center: f64,
-    ball: bool,
-    fast_inside: bool,
-    arc_1_speed: i32,
-    arc_2_speed: i32,
-) {
-    let mut radius = size / 2 - 1;
-
-    while radius > 0 {
-        //either the speed of the arcs decreases as you move away from the center or increases
-        let mut inner_speed = radius;
-        if fast_inside {
-            inner_speed = size - radius;
-        }
-        //calcaulate an angle based on the current arc placement and time
-        let angle = 0.001 * (inner_speed as f64 * current_time);
-        //this arbitrary angle is + PI so arcs are oriented at the top of the screen
-        let arc_angle_1 = (angle) * arc_1_speed as f64;
-        let arc_angle_2 = (angle + PI) * arc_2_speed as f64;
-
-        ellipse_builder(&context, ball, center, radius, arc_angle_1, arc_angle_2);
-
-        radius -= arc_spacing as i32;
-    }
-}
-pub fn conch(
-    size: i32,
-    context: web_sys::CanvasRenderingContext2d,
-    current_time: f64,
-    arc_spacing: f64,
-    center: f64,
-) {
-    let mut radius = size / 2 - 1;
-    while radius > 0 {
-        let angle = 0.1 * ((size - radius) as f64 * current_time) / (arc_spacing * 10.0);
-        let arc_angle_2 = angle + PI;
-        let arc_angle_1 = -angle * 2.0;
-        ellipse_builder(&context, true, center, radius, arc_angle_1, arc_angle_2);
-        radius -= arc_spacing as i32;
-    }
-}
-// let functions = arc_1;
 #[wasm_bindgen]
 pub fn arcs(
-    arc_spacing: f64,
+    spare_value: f64,
     current_time: f64,
-    slider_val: f64,
+    arc_count: f64,
     ball: bool,
     fast_inside: bool,
     arc_1_speed: i32,
@@ -217,7 +38,7 @@ pub fn arcs(
         size,
         context,
         current_time,
-        slider_val,
+        arc_count,
         center,
         ball,
         fast_inside,
@@ -225,6 +46,40 @@ pub fn arcs(
         i32::max(arc_1_speed, arc_2_speed),
     );
 }
+
+pub fn pattern_builder(
+    size: i32,
+    context: web_sys::CanvasRenderingContext2d,
+    current_time: f64,
+    total_arcs: f64,
+    center: f64,
+    ball: bool,
+    fast_inside: bool,
+    arc_1_speed: i32,
+    arc_2_speed: i32,
+) {
+    let mut radius = size / 2 - 10;
+    let arc_spacing = radius as f64 / total_arcs;
+
+    while radius > 0 {
+        //either the speed of the arcs decreases as you move away from the center or increases
+        let mut inner_speed = radius;
+        if fast_inside {
+            inner_speed = size - radius;
+        }
+        //calcaulate an angle based on the current arc placement and time
+        let angle = 0.001 * (inner_speed as f64 * current_time);
+        //this arbitrary angle is + PI so arcs are oriented at the top of the screen
+        let arc_angle_1 = angle * arc_1_speed as f64;
+        let arc_angle_2 = (angle * arc_2_speed as f64) + PI;
+
+        ellipse_builder(&context, ball, center, radius, arc_angle_1, arc_angle_2);
+
+        radius -= arc_spacing as i32;
+    }
+}
+// let functions = arc_1;
+
 fn ellipse_builder(
     context: &web_sys::CanvasRenderingContext2d,
     ball: bool,

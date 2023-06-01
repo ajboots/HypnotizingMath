@@ -1,4 +1,4 @@
-let UI_ANGLE_DISPLAYED = 1;
+let UI_ANGLE_DISPLAYED = 10;
 class Slider {
 
     /**
@@ -10,14 +10,14 @@ class Slider {
     constructor({ DOMselector, sliders }) {
         this.DOMselector = DOMselector;
         this.container = document.querySelector(this.DOMselector);  // Slider container
-        this.sliderWidth = 400;                                     // Slider width
-        this.sliderHeight = 400;                                    // Slider length
+        this.sliderWidth = 1000;                                     // Slider width
+        this.sliderHeight = 1000;                                    // Slider length
         this.cx = this.sliderWidth / 2;                             // Slider center X coordinate
         this.cy = this.sliderHeight / 2;                            // Slider center Y coordinate
         this.tau = 2 * Math.PI;                                     // Tau constant
         this.sliders = sliders;                                     // Sliders array with opts for each slider
         this.arcFractionSpacing = 1;                             // Spacing between arc fractions
-        this.arcFractionLength = 1000;                                // Arc fraction length
+        this.arcFractionLength = 1200;                                // Arc fraction length
         this.arcFractionThickness = 10;                             // Arc fraction thickness
         this.arcBgFractionColor = '#D8D8D8';                        // Arc fraction color for background slider
         this.handleFillColor = '#fff';                              // Slider handle fill color
