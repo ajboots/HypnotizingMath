@@ -17,8 +17,8 @@ window.addEventListener('DOMContentLoaded', function () {
         // var mouseX = - event.clientX - (this.window.innerWidth / 2);
         var mouseY = event.clientY - (this.window.innerHeight / 2);
         var mouseX = event.clientX - (this.window.innerWidth / 2); 
-        var moveX = Math.floor(mouseX / -100);
-        var moveY = Math.floor(-mouseY / -100);
+        var moveX = Math.floor(-mouseX / -200);
+        var moveY = Math.floor(-mouseY / -200);
         cyanlogo.style.transform = 'translate(' + moveX + 'px, ' + moveY + 'px)';
         redlogo.style.transform = 'translate(' + -moveX + 'px, ' + -moveY + 'px)';
     });
