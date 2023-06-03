@@ -11,12 +11,11 @@
 
   <!-- Note the usage of `type=module` here as this is an ES6 module -->
 <script>
-  if(innerHeight>innerWidth) {
-    window.location.href = "./mobile.html"
+  if(innerHeight<innerWidth) {
+    window.location.href = "./index.html"
   }
 </script>
-  <canvas id="canvas" width=800px; height=800px;></canvas>
-  <!-- <div id="circularslider" ></div> -->
+  
   <div class="container" >
     <div id="titleContainer">
       <object type="image/svg+xml" data="assets/redTitle.svg" id="redlogo" class="title">
@@ -29,6 +28,7 @@
         <span>Your browser doesn't support SVG</span>
       </object>
     </div>
+    <canvas id="canvas" width=500px; height=500px; style="padding-top: 50px;"></canvas>
     <div >
       <fieldset class="options">
         <legend class="option-title">Pattern parameters</legend>
