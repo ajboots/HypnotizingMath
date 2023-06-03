@@ -1,56 +1,189 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-  <title>My Website - Home</title>
-  <script language="javascript" type="text/javascript" src="p5.js"></script>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
   <script language="javascript" type="text/javascript" src="titleMovement.js"></script>
-  <script language="javascript" type="text/javascript" src="InteractiveArcs.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-  <script src="./prism.js"></script>
-  <link href="./interactive.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="wasm.css">
 </head>
 
-<body style="background-color: rgb(32, 32, 32);overflow: hidden;">
+<body style="background-color:rgb(12, 12, 12);">
+  <!-- <p id="slidertitle" class="slidertitle">some</p> -->
 
-  <div id="horizontalFlex">
-
-    <div id="interactiveSketchContainer">
-      <div id="interactive"></div>
-    </div>
-    <!-- <div> -->
+  <!-- Note the usage of `type=module` here as this is an ES6 module -->
+<script>
+  if(innerHeight>innerWidth) {
+    window.location.href = "./mobile.html"
+  }
+</script>
+  <canvas id="canvas" width=800px; height=800px;></canvas>
+  <!-- <div id="circularslider" ></div> -->
+  <div class="container" >
     <div id="titleContainer">
-      <object type="image/svg+xml" data="redTitle.svg" id="redlogo" class="title">
+      <object type="image/svg+xml" data="assets/redTitle.svg" id="redlogo" class="title">
         <span>Your browser doesn't support SVG</span>
       </object>
-      <object type="image/svg+xml" data="cyanTitle.svg" id="cyanlogo" class="title">
+      <object type="image/svg+xml" data="assets/cyanTitle.svg" id="cyanlogo" class="title">
         <span>Your browser doesn't support SVG</span>
       </object>
-      <object type="image/svg+xml" data="whiteTitle.svg" id="whitelogo" class="title">
+      <object type="image/svg+xml" data="assets/whiteTitle.svg" id="whitelogo" class="title">
         <span>Your browser doesn't support SVG</span>
       </object>
     </div>
-    <div class="codeContainer">
-      <h1 style="color: white; font-size: 24px;">Resulting Code</h1>
-      <pre><code class="language-javascript">  1    size = 400
-  2    speed = 1/100
-  3    spacing = 4
-  4    function setup() {
-  5      colorMode(HSB)
-  6      createCanvas(size, size);
-  7      background(0)
-  8    }
-  9    //draw pattern every frame
-  10   function draw() {
-  11     //starting at the edge of the screen, draw an arc then move inward
-  12     for (radius = size; radius > 1; radius -= spacing) {
-  13       fill((radius * 120 / size) + 240, 75, 100, alpha);
-  14       //defines and draws arc from time and arc distance from center
-  15       angle = (size - radius) * millis() * speed / (spacing / 2);
-  16       arc(size / 2, size / 2, radius, radius, -angle * 2, angle);
-  17     }
-  18   }</code></pre>
-    </div>  </div>
+    <div >
+      <fieldset class="options">
+        <legend class="option-title">Pattern parameters</legend>
+        <div style="display: flex;">
+          <div class="checkbox" style="display: flex">
+            <input type="checkbox" id="Ball" />
+            <label for="Ball" class="toggle" style="margin: auto;"><span></span></label>
+            <p>&nbsp;</p>
+            <p class="text">Ball</p>
+          </div>
+          <p>&emsp;&emsp;</p>
+          <div class="checkbox" style="display: flex ">
+            <input type="checkbox" id="Reverse" />
+            <label for="Reverse" class="toggle" style="margin: auto;"><span></span></label>
+            <p>&nbsp;</p>
+            <p class="text">Reverse</p>
+          </div>
+          <input id="random" type="button" value="Randomize" onclick="Randomize();" />
+
+        </div>
+        <p>&emsp;</p>
+
+        <p class="text">Pattern Settings</p>
+
+        <p>&emsp;</p>
+
+
+        <div>
+          <input class="range" type="range" id="TotalArcs" name="TotalArcs" min="1" max="250" value="100" step="1">
+          <input class="text-number" type="number" id="ArcCount" name="ArcCount" value="100" style="width:100px;">
+          <label class="text" for="TotalArcs">Arc Count</label>
+        </div>
+        <div>
+          <input class="range" type="range" id="Arc1Speed" name="Arc1Speed" min="-16" max="16" value="2" step="2">
+          <input class="text-number" type="number" id="Arc1Num" name="Arc1Num" value="2" style="width:100px;">
+          <label class="text" for="Arc1Speed">Angular Velocity 1</label>
+        </div>
+        <div>
+          <input class="range" type="range" id="Arc2Speed" name="Arc2Speed" min="-16" max="16" value="-2" step="2">
+          <input class="text-number" type="number" id="Arc2Num" name="Arc2Num" value="-2" style="width:100px;">
+          <label class="text" for="Arc2Speed">Angular Velocity 2</label>
+        </div>
+
+        <p>&emsp;</p>
+        <p class="text">Color Settings</p>
+        <p>&emsp;</p>
+
+        <div>
+          <input class="range" type="range" id="ColorGradient" name="ColorGradient" min="-720" max="720" value="360"
+            step="1">
+          <input class="text-number" type="number" id="ColorGradientNum" name="ColorGradientNum" value="360"
+            style="width:100px;">
+          <label class="text" for="ColorGradient">Color Change</label>
+        </div>
+        <div>
+          <input class="range" type="range" id="ColorShift" name="ColorShift" min="0" max="360" value="240" step="1">
+          <input class="text-number" type="number" id="ColorShiftNum" name="ColorShiftNum" value="240"
+            style="width:100px;">
+          <label class="text" for="ColorShift">Starting Color</label>
+        </div>
+        <div>
+          <input class="range" type="range" id="PulseColor" name="PulseColor" min="0" max="10" value="0" step=".1">
+          <input class="text-number" type="number" id="PulseColorNum" name="PulseColorNum" value="0"
+            style="width:100px;">
+            <label class="text" for="ColorPulse">Pulse Color</label>
+        </div>
+      </fieldset>
+      <p>&emsp;</p>
+      <div style="margin: auto; text-align: right; padding: 50px; float: left;">
+        <a href="https://github.com/ajboots/HypnotizingMath"><img src="assets/GithubArcs.png" alt="Rust-WASM-JS"
+            style=" height: 200px;   "></a>
+        <br>
+        <a href="https://github.com/ajboots/HypnotizingMath"><img src="assets/rustwasmjs.png" alt="Rust-WASM-JS"
+            style="width: 200px; background-color: azure; "></a>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script>
+    function Randomize() {
+      let rand_arcs = Math.floor(Math.random() * 250);
+      document.getElementById('TotalArcs').value = rand_arcs;
+      document.getElementById('ArcCount').value = rand_arcs;
+      document.getElementById('Ball').checked = Math.floor(Math.random() * 2)
+      document.getElementById('Reverse').checked =  Math.floor(Math.random() * 2)
+      let rand_speed_1 = Math.floor(Math.random() * 17);
+      document.getElementById('Arc1Num').value = rand_speed_1;     
+      document.getElementById('Arc1Speed').value = rand_speed_1;      
+      let rand_speed_2 = Math.floor(Math.random() * 17);
+      document.getElementById('Arc2Speed').value = rand_speed_2;
+      document.getElementById('Arc2Num').value = rand_speed_2;
+      let rand_gradient_color = Math.floor(Math.random() * 1440) -720;
+      document.getElementById('ColorGradientNum').value = rand_gradient_color;
+      document.getElementById('ColorGradient').value = rand_gradient_color;
+      let rand_gradient_shift = Math.floor(Math.random() * 360);
+      document.getElementById('ColorShift').value = rand_gradient_shift;
+      document.getElementById('ColorShiftNum').value = rand_gradient_shift;
+      let random_pulse = 0;
+      if(Math.floor(Math.random() * 4) == 0) {
+        random_pulse = Math.floor(Math.random() * 10);
+      }
+      document.getElementById('PulseColorNum').value = random_pulse;
+      document.getElementById('PulseColor').value = random_pulse;
+      frameCount = 0;
+    }
+  </script>
+  <script id="link slider and number">
+    let rangeID = ['Arc1Speed', 'Arc2Speed', 'TotalArcs', 'ColorGradient', 'ColorShift', 'PulseColor']
+    let fieldID = ['Arc1Num', 'Arc2Num', 'ArcCount', 'ColorGradientNum', 'ColorShiftNum', 'PulseColorNum']
+    for (let i = 0; i < rangeID.length; i++) {
+      addListeners(rangeID[i], fieldID[i])
+    }
+    function addListeners(rangeName, numName) {
+      var range = document.getElementById(rangeName);
+      var field = document.getElementById(numName);
+      range.addEventListener('input', function (e) {
+        field.value = e.target.value;
+      });
+      field.addEventListener('input', function (e) {
+        range.value = e.target.value;
+      });
+    }
+  </script>
+
+  <script type="module">
+    import init, { arcs } from './pkg/wasm_sample.js';
+
+    async function run() {
+      await init();
+
+      // make the function available to the browser
+      window.arcs = arcs;
+      drawArcs();
+    }
+    run();
+  </script>
+  <script>
+    let frameCount = 1;
+    function drawArcs() {
+      arcs(
+        frameCount,
+        document.getElementById('ArcCount').value,
+        document.getElementById('Ball').checked,
+        document.getElementById('Reverse').checked,
+        document.getElementById('Arc1Num').value,
+        document.getElementById('Arc2Num').value,
+        document.getElementById('ColorGradientNum').value,
+        document.getElementById('ColorShiftNum').value,
+        document.getElementById('PulseColorNum').value,);
+      requestAnimationFrame(drawArcs);
+      frameCount++;
+    }
+    function resizeSlider() {
+    }
+  </script>
 
 </body>
 
