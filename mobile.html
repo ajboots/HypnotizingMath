@@ -3,7 +3,7 @@
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
   <script language="javascript" type="text/javascript" src="titleMovement.js"></script>
-  <link rel="stylesheet" type="text/css" href="wasm.css">
+  <link rel="stylesheet" type="text/css" href="mobile.css">
 </head>
 
 <body style="background-color:rgb(12, 12, 12);">
@@ -17,7 +17,7 @@
 </script>
   
   <div class="container" >
-    <div id="titleContainer">
+    <div id="titleContainer" style="padding-top: 50px;">
       <object type="image/svg+xml" data="assets/redTitle.svg" id="redlogo" class="title">
         <span>Your browser doesn't support SVG</span>
       </object>
@@ -28,10 +28,11 @@
         <span>Your browser doesn't support SVG</span>
       </object>
     </div>
-    <canvas id="canvas" width=500px; height=500px; style="padding-top: 50px;"></canvas>
+    <canvas id="canvas" width=900px; height=900px; style="padding-top: 50px;"></canvas>
     <div >
-      <fieldset class="options">
+      <fieldset class="options" style="width: 100%; max-width: 900px;">
         <legend class="option-title">Pattern parameters</legend>
+        <p>&emsp;</p>
         <div style="display: flex;">
           <div class="checkbox" style="display: flex">
             <input type="checkbox" id="Ball" />
@@ -50,7 +51,7 @@
 
         </div>
         <p>&emsp;</p>
-
+        <p>&emsp;</p>
         <p class="text">Pattern Settings</p>
 
         <p>&emsp;</p>
@@ -61,11 +62,13 @@
           <input class="text-number" type="number" id="ArcCount" name="ArcCount" value="100" style="width:100px;">
           <label class="text" for="TotalArcs">Arc Count</label>
         </div>
+        <p>&emsp;</p>
         <div>
           <input class="range" type="range" id="Arc1Speed" name="Arc1Speed" min="-16" max="16" value="2" step="2">
           <input class="text-number" type="number" id="Arc1Num" name="Arc1Num" value="2" style="width:100px;">
           <label class="text" for="Arc1Speed">Angular Velocity 1</label>
         </div>
+        <p>&emsp;</p>
         <div>
           <input class="range" type="range" id="Arc2Speed" name="Arc2Speed" min="-16" max="16" value="-2" step="2">
           <input class="text-number" type="number" id="Arc2Num" name="Arc2Num" value="-2" style="width:100px;">
@@ -83,12 +86,14 @@
             style="width:100px;">
           <label class="text" for="ColorGradient">Color Change</label>
         </div>
+        <p>&emsp;</p>
         <div>
           <input class="range" type="range" id="ColorShift" name="ColorShift" min="0" max="360" value="240" step="1">
           <input class="text-number" type="number" id="ColorShiftNum" name="ColorShiftNum" value="240"
             style="width:100px;">
           <label class="text" for="ColorShift">Starting Color</label>
         </div>
+        <p>&emsp;</p>
         <div>
           <input class="range" type="range" id="PulseColor" name="PulseColor" min="0" max="10" value="0" step=".1">
           <input class="text-number" type="number" id="PulseColorNum" name="PulseColorNum" value="0"
