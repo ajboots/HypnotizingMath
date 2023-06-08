@@ -10,13 +10,13 @@
   <!-- <p id="slidertitle" class="slidertitle">some</p> -->
 
   <!-- Note the usage of `type=module` here as this is an ES6 module -->
-<script>
-  if(innerHeight<innerWidth) {
-    window.location.href = "./index.html"
-  }
-</script>
-  
-  <div class="container" >
+  <script>
+    if (innerHeight < innerWidth) {
+      window.location.href = "./index.html"
+    }
+  </script>
+
+  <div class="container">
     <div id="titleContainer" style="padding-top: 50px;">
       <object type="image/svg+xml" data="assets/redTitle.svg" id="redlogo" class="title">
         <span>Your browser doesn't support SVG</span>
@@ -29,23 +29,25 @@
       </object>
     </div>
     <canvas id="canvas" width=900px; height=900px; style="padding-top: 50px;"></canvas>
-    <div >
+    <div>
       <fieldset class="options" style="width: 100%; max-width: 900px;">
         <legend class="option-title">Pattern parameters</legend>
         <p>&emsp;</p>
         <div style="display: flex;">
-          <div class="checkbox" style="display: flex">
-            <input type="checkbox" id="Ball" />
-            <label for="Ball" class="toggle" style="margin: auto;"><span></span></label>
-            <p>&nbsp;</p>
-            <p class="text">Ball</p>
-          </div>
-          <p>&emsp;&emsp;</p>
-          <div class="checkbox" style="display: flex ">
-            <input type="checkbox" id="Reverse" />
-            <label for="Reverse" class="toggle" style="margin: auto;"><span></span></label>
-            <p>&nbsp;</p>
-            <p class="text">Reverse</p>
+          <div style="display: flex; height: 80%;">
+            <div class="checkbox" style="display: flex">
+              <input type="checkbox" id="Ball" />
+              <label for="Ball" class="toggle" style="margin: auto;"><span></span></label>
+              <p>&nbsp;</p>
+              <p class="text">Ball</p>
+            </div>
+            <p>&emsp;&emsp;</p>
+            <div class="checkbox" style="display: flex ">
+              <input type="checkbox" id="Reverse" />
+              <label for="Reverse" class="toggle" style="margin: auto;"><span></span></label>
+              <p>&nbsp;</p>
+              <p class="text">Reverse</p>
+            </div>
           </div>
           <input id="random" type="button" value="Randomize" onclick="Randomize();" />
 
@@ -98,7 +100,7 @@
           <input class="range" type="range" id="PulseColor" name="PulseColor" min="0" max="10" value="0" step=".1">
           <input class="text-number" type="number" id="PulseColorNum" name="PulseColorNum" value="0"
             style="width:100px;">
-            <label class="text" for="ColorPulse">Pulse Color</label>
+          <label class="text" for="ColorPulse">Pulse Color</label>
         </div>
       </fieldset>
       <p>&emsp;</p>
@@ -118,21 +120,21 @@
       document.getElementById('TotalArcs').value = rand_arcs;
       document.getElementById('ArcCount').value = rand_arcs;
       document.getElementById('Ball').checked = Math.floor(Math.random() * 2)
-      document.getElementById('Reverse').checked =  Math.floor(Math.random() * 2)
+      document.getElementById('Reverse').checked = Math.floor(Math.random() * 2)
       let rand_speed_1 = Math.floor(Math.random() * 17);
-      document.getElementById('Arc1Num').value = rand_speed_1;     
-      document.getElementById('Arc1Speed').value = rand_speed_1;      
+      document.getElementById('Arc1Num').value = rand_speed_1;
+      document.getElementById('Arc1Speed').value = rand_speed_1;
       let rand_speed_2 = Math.floor(Math.random() * 17);
       document.getElementById('Arc2Speed').value = rand_speed_2;
       document.getElementById('Arc2Num').value = rand_speed_2;
-      let rand_gradient_color = Math.floor(Math.random() * 1440) -720;
+      let rand_gradient_color = Math.floor(Math.random() * 1440) - 720;
       document.getElementById('ColorGradientNum').value = rand_gradient_color;
       document.getElementById('ColorGradient').value = rand_gradient_color;
       let rand_gradient_shift = Math.floor(Math.random() * 360);
       document.getElementById('ColorShift').value = rand_gradient_shift;
       document.getElementById('ColorShiftNum').value = rand_gradient_shift;
       let random_pulse = 0;
-      if(Math.floor(Math.random() * 4) == 0) {
+      if (Math.floor(Math.random() * 4) == 0) {
         random_pulse = Math.floor(Math.random() * 10);
       }
       document.getElementById('PulseColorNum').value = random_pulse;
