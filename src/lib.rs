@@ -13,7 +13,7 @@ pub fn arcs(
     arc_2_speed: i32,
     gradient_mod: i32,
     color_add: i32,
-    color_change_speed: i32,
+    color_change_speed: f64,
 ) {
     let document = web_sys::window().unwrap().document().unwrap();
     let canvas = document.get_element_by_id("canvas").unwrap();
@@ -61,7 +61,7 @@ pub fn pattern_builder(
     arc_2_speed: i32,
     gradient_mod: i32,
     color_add: i32,
-    color_change_speed: i32,
+    color_change_speed: f64,
 ) {
     let mut radius = (size / 2.0) - 20.0;
     let arc_spacing = radius / total_arcs;
@@ -75,7 +75,7 @@ pub fn pattern_builder(
         let arc_angle_1 = angle * arc_1_speed as f64;
         let arc_angle_2 = (angle * arc_2_speed as f64) + PI;
 
-        let arc_color = ((color_change_speed * frame_count as i32)
+        let arc_color = ((color_change_speed * frame_count) as i32
             + color_add
             + radius as i32 * gradient_mod / (center as i32))
             % 360;
